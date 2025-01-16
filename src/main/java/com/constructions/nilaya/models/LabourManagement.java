@@ -1,9 +1,13 @@
 package com.constructions.nilaya.models;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.time.LocalDate;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Document(collection = "labourmanagement")
 public class LabourManagement {
@@ -12,7 +16,9 @@ public class LabourManagement {
     private String id;
     private String projectName;
     private String engineerName;
-    private LocalDate createdDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss a")
+    @CreatedDate
+    private LocalDateTime createdDate;
     private String createdBy;
     private String typeOfLabour;
     private int labourCount;
@@ -42,14 +48,10 @@ public class LabourManagement {
         this.engineerName = engineerName;
     }
 
-    public LocalDate getCreatedDate() {
+    public LocalDateTime getCreatedDate() {
         return createdDate;
     }
-
-    public void setCreatedDate(LocalDate createdDate) {
-        this.createdDate = createdDate;
-    }
-
+    
     public String getCreatedBy() {
         return createdBy;
     }
@@ -73,4 +75,5 @@ public class LabourManagement {
     public void setLabourCount(int labourCount) {
         this.labourCount = labourCount;
     }
+
 }
