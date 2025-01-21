@@ -12,6 +12,5 @@ public interface EmployeeRepository extends MongoRepository<Employees, String> {
 	
 	List<Employees> findByNameIgnoreCase(String name); 
 	List<Employees> findByNameIgnoreCaseContaining(String partialName);
-
-
+	Employees findByUserNameAndPassword(String userName, String password);
 }

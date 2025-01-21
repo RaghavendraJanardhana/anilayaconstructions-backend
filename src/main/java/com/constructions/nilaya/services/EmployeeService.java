@@ -3,6 +3,7 @@ package com.constructions.nilaya.services;
 import com.constructions.nilaya.models.Employees;
 import com.constructions.nilaya.repositories.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,7 +16,11 @@ public class EmployeeService {
 
     // Save employee
     public Employees saveEmployee(Employees employee) {
-        return employeeRepository.save(employee);
+    	try {
+            return employeeRepository.save(employee);
+        } catch (DuplicateKeyException ex) {
+            throw ex;
+        }
     }
 
     // Find employee by name
@@ -27,4 +32,8 @@ public class EmployeeService {
     public List<Employees> findAllEmployees() {
         return employeeRepository.findAll();
     }
+
+	public Employees findEmployeeByUserNameAndPassword(String userName, String password) {
+		return employeeRepository.findByUserNameAndPassword(userName, password);		
+	}
 }
