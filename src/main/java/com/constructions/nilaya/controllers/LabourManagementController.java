@@ -2,6 +2,7 @@ package com.constructions.nilaya.controllers;
 
 import java.io.ByteArrayInputStream;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -160,6 +161,15 @@ public class LabourManagementController {
                 .body(filteredRecords);
     }
 
+    @GetMapping("/search")
+    public List<LabourManagement> getLabourData(
+        @RequestParam(required = false) String projectName,
+        @RequestParam(required = false) String engineerName,
+        @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
+        @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate) {
+        
+        return service.getLabourData(projectName, engineerName, startDate, endDate);
+    }
     
 
 }

@@ -5,6 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +13,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.constructions.nilaya.models.LabourManagement;
@@ -28,7 +30,7 @@ public class LabourManagementService {
     }
 
     public List<LabourManagement> getAllLabourManagement() {
-        return repository.findAll();
+        return repository.findAll(Sort.by(Sort.Order.desc("createdDate")));
     }
 
     public Optional<LabourManagement> getLabourManagementById(String id) {
@@ -60,6 +62,15 @@ public class LabourManagementService {
         return repository.findByCreatedDateBetween(startDate.atStartOfDay(), endDate.atTime(23, 59, 59));
     }
 
+    public List<LabourManagement> getLabourData(
+            String projectName, 
+            String engineerName, 
+            Date startDate, 
+            Date endDate) {
+            
+            return repository.findRecordsByProjectNameOrEngineerNameOrCreatedDateBetween(
+                projectName, engineerName, startDate, endDate);
+        }
     
     public List<LabourManagement> findRecordsByProjectAndDates(String projectName, LocalDate startDate, LocalDate endDate) {
         // Convert LocalDate to LocalDateTime (start of day, end of day)

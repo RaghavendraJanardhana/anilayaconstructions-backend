@@ -1,12 +1,13 @@
 package com.constructions.nilaya.repositories;
 
-import com.constructions.nilaya.models.LabourManagement;
-
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
+
+import com.constructions.nilaya.models.LabourManagement;
 
 @Repository
 public interface LabourManagementRepository extends MongoRepository<LabourManagement, String> {
@@ -17,4 +18,11 @@ public interface LabourManagementRepository extends MongoRepository<LabourManage
 			LocalDateTime endDateTime);
 
 	List<LabourManagement> findByEngineerNameIgnoreCase(String engineerName);
-}
+	
+	List<LabourManagement> findRecordsByProjectNameOrEngineerNameOrCreatedDateBetween(
+	        String projectName, 
+	        String engineerName, 
+	        Date startDate, 
+	        Date endDate);
+	}
+

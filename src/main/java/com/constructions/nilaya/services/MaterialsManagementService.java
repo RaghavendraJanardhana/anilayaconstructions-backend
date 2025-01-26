@@ -12,6 +12,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.constructions.nilaya.models.MaterialsManagement;
@@ -28,7 +29,7 @@ public class MaterialsManagementService {
     }
 
     public List<MaterialsManagement> getAllMaterialsManagement() {
-        return repository.findAll();
+        return repository.findAll(Sort.by(Sort.Order.desc("createdDate")));
     }
 
     public Optional<MaterialsManagement> getMaterialsManagementById(String id) {
