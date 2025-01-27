@@ -59,8 +59,9 @@ public class LabourManagementService {
 
     public List<LabourManagement> findRecordsBetweenDates(LocalDate startDate, LocalDate endDate) {
         // Filter records between startDate and endDate
-        return repository.findByCreatedDateBetween(startDate.atStartOfDay(), endDate.atTime(23, 59, 59));
+        return repository.findByCreatedDateBetweenOrderByCreatedDateDesc(startDate.atStartOfDay(), endDate.atTime(23, 59, 59));
     }
+    
 
     public List<LabourManagement> getLabourData(
             String projectName, 
@@ -157,4 +158,6 @@ public class LabourManagementService {
         // Query the repository to find records by engineerName
         return repository.findByEngineerNameIgnoreCase(engineerName);
     }
+
+	
 }

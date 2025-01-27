@@ -24,5 +24,8 @@ public interface LabourManagementRepository extends MongoRepository<LabourManage
 	        String engineerName, 
 	        Date startDate, 
 	        Date endDate);
+
+	List<LabourManagement> findByCreatedDateBetweenOrderByCreatedDateDesc(LocalDateTime atStartOfDay,
+			LocalDateTime atTime);
 	}
 
