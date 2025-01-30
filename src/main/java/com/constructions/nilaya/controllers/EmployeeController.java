@@ -21,7 +21,7 @@ import com.constructions.nilaya.services.EmployeeService;
 import jakarta.validation.Valid;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600,allowCredentials = "true")
 @RequestMapping("/api/employees")
 public class EmployeeController {
     @Autowired

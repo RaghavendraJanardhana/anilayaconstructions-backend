@@ -24,7 +24,7 @@ import com.constructions.nilaya.models.LabourManagement;
 import com.constructions.nilaya.services.LabourManagementService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600,allowCredentials = "true")
 @RequestMapping("/api/labourmanagement")
 public class LabourManagementController {
 
